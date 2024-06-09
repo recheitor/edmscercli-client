@@ -92,7 +92,7 @@ function TimeOffRequestPage() {
 
   return (
     <Box className={styles.container}>
-      <Typography variant="h2" className={styles.header}>
+      <Typography variant="h6" className={styles.header}>
         Time Off Request
       </Typography>
       <form onSubmit={handleSubmit}>

@@ -21,7 +21,7 @@ function EmployeePage(): ReactElement {
     <>
       <Box sx={{ padding: 3 }}>
         <Typography variant="h4" gutterBottom>
-          Choose One Employee to Login as
+          Login as
         </Typography>
         {employees.map(employee => (
           <Link to={`/employee/${employee._id}`} key={employee._id} style={{ textDecoration: 'none' }}>

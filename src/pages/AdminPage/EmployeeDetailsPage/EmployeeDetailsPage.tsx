@@ -51,7 +51,7 @@ function EmployeeDetailsPage(): ReactElement {
   };
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box>
       <Typography variant="h4" gutterBottom>Employee Details</Typography>
       {employee && (
         <Card sx={{ boxShadow: 3, padding: 2 }}>
