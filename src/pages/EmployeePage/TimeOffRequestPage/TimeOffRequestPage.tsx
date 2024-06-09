@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Box,
   Button,
@@ -27,6 +27,7 @@ function TimeOffRequestPage() {
   const [severity, setSeverity] = useState<"success" | "error">("error");
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const endDateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     RequestCategoriesService.getAllRequestCategories()
@@ -87,7 +88,20 @@ function TimeOffRequestPage() {
   const disablePastDates = (date: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return date <= today;
+    return date < today;
+  };
+
+  const disableEndDate = (date: Date) => {
+    return startDate ? date < startDate : false;
+  };
+
+  const handleStartDateChange = (newDate: Date | null) => {
+    setStartDate(newDate);
+    if (newDate) {
+      setTimeout(() => {
+        endDateRef.current?.querySelector('input')?.focus();
+      }, 100); // Delay to ensure the end date picker is opened
+    }
   };
 
   return (
@@ -135,13 +149,15 @@ function TimeOffRequestPage() {
             <DatePicker
               label="Start Date"
               value={startDate}
-              onChange={(newDate) => setStartDate(newDate)}
+              onChange={handleStartDateChange}
               shouldDisableDate={disablePastDates}
             />
             <DatePicker
               label="End Date"
               value={endDate}
               onChange={(newDate) => setEndDate(newDate)}
+              shouldDisableDate={disableEndDate}
+              ref={endDateRef}
             />
           </Box>
         </LocalizationProvider>
