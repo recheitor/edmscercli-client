@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import { useState, useEffect, ReactElement } from 'react';
 import { Box, Button, Card, CardContent, CardActions, Typography, Avatar, Grid, Snackbar, Alert } from '@mui/material';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import EmployeesService from '../../../api/EmployeesService/EmployeesService';
@@ -41,7 +41,7 @@ function EmployeeDetailsPage(): ReactElement {
       })
       .catch((err: unknown) => {
         if (err instanceof Error) {
-          setMessage(err.response?.data?.error || 'An error occurred');
+          setMessage((err as { response?: { data?: { error?: string } } }).response?.data?.error || 'An error occurred');
         } else {
           setMessage('An unexpected error occurred');
         }

@@ -1,8 +1,8 @@
 export interface NewTimeOffRequestData {
-  employee_id: string;
+  employee_id?: string;
   request_category_id: string;
-  start_date: string | null;
-  end_date: string | null;
+  start_date: string ;
+  end_date: string;
 }
 
 export interface TimeOffRequest {

@@ -45,7 +45,7 @@ function CreateEmployeePage(): ReactElement {
         })
         .catch((err: unknown) => {
           if (err instanceof Error) {
-            setMessage(err.response?.data?.error || 'An error occurred');
+            setMessage((err as { response?: { data?: { error?: string } } }).response?.data?.error || 'An error occurred');
           } else {
             setMessage('An unexpected error occurred');
           }

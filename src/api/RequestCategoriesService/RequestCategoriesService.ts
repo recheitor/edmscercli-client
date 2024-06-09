@@ -1,21 +1,18 @@
-
-import axios from 'axios'
+import axios, { AxiosInstance }  from "axios";
 
 class RequestCategoriesService {
-
+  api: AxiosInstance;
     constructor() {
         this.api = axios.create({
             baseURL: `${import.meta.env.VITE_API_HOST_URL}/api/requestCategories`
         })
-
-
     }
 
     getAllRequestCategories() {
         return this.api.get('/')
     }
 
-    createRequestCategories(requestCategoryData) {
+    createRequestCategories(requestCategoryData: string) {
         return this.api.post(`/create`, requestCategoryData)
     }
 

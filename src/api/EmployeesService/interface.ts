@@ -1,3 +1,5 @@
+import {TimeOffRequest} from './../TimeOffRequestsService'
+
 export interface Employee {
   _id: string;
   name: string;
@@ -6,6 +8,7 @@ export interface Employee {
   salary: number;
   createdAt: string;
   updatedAt: string;
+  timeOffRequests?: TimeOffRequest[]
 }
 export interface NewEmployee {
   name: string;

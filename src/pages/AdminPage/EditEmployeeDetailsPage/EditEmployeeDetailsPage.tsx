@@ -19,7 +19,7 @@ function EditEmployeeDetailsPage(): ReactElement {
       EmployeesService.getOneEmployee(id)
         .then(({ data }: GetEmployeeResponse) => {
           setEmployee(data);
-          setEditedEmployee(data); // Pre-fill the form with employee data
+          setEditedEmployee(data);
         })
         .catch((err: unknown) => {
           if (err instanceof Error) {
@@ -53,8 +53,8 @@ function EditEmployeeDetailsPage(): ReactElement {
           }, 2000);
         })
         .catch((err: unknown) => {
-          if (err instanceof Error) {
-            setMessage(err.response?.data?.error || 'An error occurred');
+          if (err) {
+            setMessage((err as { response?: { data?: { error?: string } } }).response?.data?.error || 'An error occurred');
           } else {
             setMessage('An unexpected error occurred');
           }
