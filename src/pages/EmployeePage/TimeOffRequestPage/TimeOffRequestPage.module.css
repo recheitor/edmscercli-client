@@ -1,0 +1,29 @@
+.header {
+  text-align: center;
+  margin-bottom: 3vh;
+}
+
+.categoryButton {
+  margin: 1vw !important;
+  width: 30vw;
+  font-size: 2vw !important;
+}
+
+
+.datePickerContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2vh;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+
+.goBackButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}

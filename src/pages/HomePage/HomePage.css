@@ -1,0 +1,12 @@
+.home-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.home-links-button {
+    margin: 0 auto;
+    width: 30vw;
+    height: 7vw;
+    font-size: 2vw;
+}

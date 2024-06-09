@@ -1,0 +1,6 @@
+.createEmployeeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    margin-bottom: 16px;
+}
