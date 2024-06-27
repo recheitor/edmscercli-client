@@ -95,6 +95,15 @@ function EditEmployeeDetailsPage(): ReactElement {
               margin="normal"
             />
             <TextField
+            name="phone"
+            label="Phone"
+            type="string"
+            value={editedEmployee.phone}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+            <TextField
               name="salary"
               label="Salary"
               type="number"

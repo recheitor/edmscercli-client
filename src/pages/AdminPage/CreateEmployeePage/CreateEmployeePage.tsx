@@ -10,6 +10,7 @@ function CreateEmployeePage(): ReactElement {
     name: '',
     position: '',
     email: '',
+    phone:'',
     salary: ''
   });
   const [emailError, setEmailError] = useState<boolean>(false);
@@ -84,6 +85,15 @@ function CreateEmployeePage(): ReactElement {
             value={newEmployee.email}
             error={submitted && emailError}
             helperText={submitted && emailError ? 'Invalid email format' : ''}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+           <TextField
+            name="phone"
+            label="Phone"
+            type="string"
+            value={newEmployee.phone}
             onChange={handleChange}
             fullWidth
             margin="normal"

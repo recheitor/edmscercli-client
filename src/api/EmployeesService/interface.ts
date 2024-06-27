@@ -5,6 +5,7 @@ export interface Employee {
   name: string;
   position: string;
   email: string;
+  phone: string;
   salary: number;
   createdAt: string;
   updatedAt: string;
@@ -15,6 +16,7 @@ export interface NewEmployee {
   name: string;
   position: string;
   email: string;
+  phone:string;
   salary: string;
 }
 export interface GetAllEmployeesResponse {

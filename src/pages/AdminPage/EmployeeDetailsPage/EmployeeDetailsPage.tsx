@@ -64,6 +64,7 @@ function EmployeeDetailsPage(): ReactElement {
                 <Typography variant="h5" component="div">{employee.name.toUpperCase()}</Typography>
                 <Typography variant="body1">Position: {employee.position}</Typography>
                 <Typography variant="body1">Email: {employee.email}</Typography>
+                <Typography variant="body1">Phone: {employee.phone}</Typography>
                 <Typography variant="body1">Salary: {employee.salary}</Typography>
                 <Typography variant="body2" color="text.secondary">Created: {formatDate(employee.createdAt)}</Typography>
                 <Typography variant="body2" color="text.secondary">Updated: {formatDate(employee.updatedAt)}</Typography>
