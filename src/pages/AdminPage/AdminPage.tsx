@@ -9,11 +9,11 @@ function AdminPage(): ReactElement {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true); // Start loading
+    setLoading(true);
     EmployeesService.getAllEmployees()
       .then(({ data }: GetAllEmployeesResponse) => {
         setEmployees(data);
-        setLoading(false); // Stop loading after data is received
+        setLoading(false);
       })
       .catch((err: unknown) => {
         if (err instanceof Error) {
@@ -21,7 +21,7 @@ function AdminPage(): ReactElement {
         } else {
           console.error('Unexpected error:', err);
         }
-        setLoading(false); // Stop loading even if there is an error
+        setLoading(false); 
       });
   }, []);
 

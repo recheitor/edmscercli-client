@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactElement, ChangeEvent, FormEvent } from 'react';
-import { Box, Button, TextField, Snackbar, Alert, Typography } from '@mui/material';
+import { Box, Button, TextField, Snackbar, Alert, Typography, CircularProgress } from '@mui/material';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './EditEmployeeDetailsPage.module.css';
 import EmployeesService from '../../../api/EmployeesService/EmployeesService';
@@ -11,15 +11,18 @@ function EditEmployeeDetailsPage(): ReactElement {
   const [message, setMessage] = useState<string | null>(null);
   const [severity, setSeverity] = useState<'success' | 'error'>('success');
   const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
+          setLoading(true);
       EmployeesService.getOneEmployee(id)
         .then(({ data }: GetEmployeeResponse) => {
           setEmployee(data);
           setEditedEmployee(data);
+              setLoading(false);
         })
         .catch((err: unknown) => {
           if (err instanceof Error) {
@@ -27,6 +30,7 @@ function EditEmployeeDetailsPage(): ReactElement {
           } else {
             console.error('Unexpected error:', err);
           }
+          setLoading(false);
         });
     }
   }, [id]);
@@ -66,66 +70,72 @@ function EditEmployeeDetailsPage(): ReactElement {
 
   return (
     <Box sx={{ padding: 3 }}>
-      <Typography variant="h4" gutterBottom>Edit Employee Details</Typography>
-      {employee && editedEmployee && (
-        <form onSubmit={handleSubmit}>
-          <div className={styles.editDetailsForm}>
-            <TextField
-              name="name"
-              label="Name"
-              value={editedEmployee.name}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              name="position"
-              label="Position"
-              value={editedEmployee.position}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              name="email"
-              label="Email"
-              value={editedEmployee.email}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-            name="phone"
-            label="Phone"
-            type="string"
-            value={editedEmployee.phone}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-            <TextField
-              name="salary"
-              label="Salary"
-              type="number"
-              value={editedEmployee.salary}
-              onChange={handleChange}
-              fullWidth
-              margin="normal"
-            />
-            <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '2vw' }}>Submit</Button>
-          </div>
-        </form>
-      )}
-      <Link to={`/admin/employee/${id}`}>
-        <Button variant="outlined" size="large" sx={{ marginTop: '2vw' }}>Cancel</Button>
-      </Link>
-      <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-        <Alert onClose={() => setOpen(false)} severity={severity} sx={{ width: '100%' }}>
-          {message}
-        </Alert>
-      </Snackbar>
+        <Typography variant="h4" gutterBottom>Edit Employee Details</Typography>
+        {loading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </Box>
+        ) : (
+            employee && editedEmployee && (
+                <form onSubmit={handleSubmit}>
+                    <div className={styles.editDetailsForm}>
+                        <TextField
+                            name="name"
+                            label="Name"
+                            value={editedEmployee.name}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            name="position"
+                            label="Position"
+                            value={editedEmployee.position}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            name="email"
+                            label="Email"
+                            value={editedEmployee.email}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            name="phone"
+                            label="Phone"
+                            type="string"
+                            value={editedEmployee.phone}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <TextField
+                            name="salary"
+                            label="Salary"
+                            type="number"
+                            value={editedEmployee.salary}
+                            onChange={handleChange}
+                            fullWidth
+                            margin="normal"
+                        />
+                        <Button type="submit" variant="contained" color="primary" sx={{ marginTop: '2vw' }}>Submit</Button>
+                    </div>
+                </form>
+            )
+        )}
+        <Link to={`/admin/employee/${id}`}>
+            <Button variant="outlined" size="large" sx={{ marginTop: '2vw' }}>Cancel</Button>
+        </Link>
+        <Snackbar open={open} autoHideDuration={6000} onClose={() => setOpen(false)} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            <Alert onClose={() => setOpen(false)} severity={severity} sx={{ width: '100%' }}>
+                {message}
+            </Alert>
+        </Snackbar>
     </Box>
-  );
+);
 }
 
 export default EditEmployeeDetailsPage;
