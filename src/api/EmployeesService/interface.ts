@@ -8,6 +8,7 @@ export interface Employee {
   salary: number;
   createdAt: string;
   updatedAt: string;
+  status: boolean;
   timeOffRequests?: TimeOffRequest[]
 }
 export interface NewEmployee {

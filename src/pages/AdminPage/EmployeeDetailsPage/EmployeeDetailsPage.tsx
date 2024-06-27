@@ -67,6 +67,15 @@ function EmployeeDetailsPage(): ReactElement {
                 <Typography variant="body1">Salary: {employee.salary}</Typography>
                 <Typography variant="body2" color="text.secondary">Created: {formatDate(employee.createdAt)}</Typography>
                 <Typography variant="body2" color="text.secondary">Updated: {formatDate(employee.updatedAt)}</Typography>
+               {employee.status ? (
+  <Typography variant="h5" sx={{ mt: 2, fontWeight: 'bold', color: 'green' }}>
+    EMPLOYEE IS ONLINE
+  </Typography>
+) : (
+  <Typography variant="h5" sx={{ mt: 2, fontWeight: 'bold', color: 'red' }}>
+    EMPLOYEE IS OFFLINE
+  </Typography>
+)}
               </Grid>
             </Grid>
           </CardContent>
